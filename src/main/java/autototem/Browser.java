@@ -29,11 +29,11 @@ public class Browser {
         loginInserter.insertLogin("joao.mendes@zerohum.com.br", "Joaopedro132@");
 
 
-
-        while(i < 5) {
+        while(i < 7) {
 
              wf.hold();
              requestReacher.reach();
+             wf.hold();
              requestCreator.createRequest(i);
              i++;
          }

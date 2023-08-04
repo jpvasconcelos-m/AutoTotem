@@ -108,7 +108,7 @@ void fillAdditionalInformation(int i){
 }
 void createRequest(int k){
 
-    WebElement recordRequestButton = wf.findFieldXpath("//button[@id='btnGravar']");
+  //  WebElement recordRequestButton = wf.findFieldXpath("//button[@id='btnGravar']");
 
 
     openRequestTab();
