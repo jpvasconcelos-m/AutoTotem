@@ -19,21 +19,23 @@ public class Browser {
    }
 
     public static void main(String[] args) throws Exception {
-         int i =1;
-         while(i != 0) {
-             i=0;
-             Browser browser = new Browser();
-             RequestReacher requestReacher = new RequestReacher();
-             LoginInserter loginInserter = new LoginInserter();
-             RequestCreator requestCreator = new RequestCreator();
-             browser.accessAddress("https://www.cesu.pe.gov.br/");
+         int i = 0;
+        Browser browser = new Browser();
+        RequestReacher requestReacher = new RequestReacher();
+        LoginInserter loginInserter = new LoginInserter();
+        RequestCreator requestCreator = new RequestCreator();
+
+        browser.accessAddress("https://www.cesu.pe.gov.br/");
+        loginInserter.insertLogin("joao.mendes@zerohum.com.br", "Joaopedro132@");
 
 
-             loginInserter.insertLogin("joao.mendes@zerohum.com.br", "Joaopedro132@");
+
+        while(i < 5) {
 
              wf.hold();
              requestReacher.reach();
-             requestCreator.createRequest();
+             requestCreator.createRequest(i);
+             i++;
          }
     }
 }

@@ -10,7 +10,7 @@ public class RequestCreator {
 
 WElementFinder wf = new WElementFinder();
 String iframe1Xpath = "//iframe[@id='frameNovaSolicitacao']";
-String iframe2Xpath = "//div[@id='fieldDescricao']//div[@class='controls']//div[@class='controls']//iframe[@class='wysihtml5-sandbox'];";
+String iframe2Xpath = "//iframe[@id='fraInformacoesComplementares']";
 
 void openRequestTab(){
     WebElement NewRequestButton = wf.findFieldXpath(
@@ -49,13 +49,41 @@ void searchPerson(){
     Tab3Button.click();
  }
  String DescriptionStringer(int i){
-     String[] Descricoes = {"Configuração do totem do balcão de informações"
-     ,"Configuração do painel da ortopedia","Configuração do painel da marcação de consultas"
-     ,"Configuração do totem da marcação de consultas.","Configuração do totem do primeiro andar",
-     "Configuração do painel da clínica médica","Configuração do painel da clínica urológica"
+     String[] Descricoes = {"Configuração do totem do balcão de informações."
+     ,"Configuração do painel da ortopedia.","Configuração do painel da marcação de consultas."
+     ,"Configuração do totem da marcação de consultas.","Configuração do totem do primeiro andar.",
+     "Configuração do painel da clínica médica.","Configuração do painel da clínica urológica."
      };
      return Descricoes[i];
  }
+ String TagStringer(int i){
+    String[] Tags = {"1021546","1020905","1021551","1021021","1021268","1020932","1020901"
+    };
+
+    return Tags[i];
+ }
+ void fillTagField(int i){
+    WebElement TagField = wf.findFieldXpath("//input[@id='campoDyn_3697']");
+    String Tag = TagStringer(i);
+    TagField.sendKeys(Tag);
+ }
+ void fillRemainingFields(){
+    WebElement UnityField = wf.findFieldXpath("//input[@id='campoDyn_3699']");
+    WebElement SectorField = wf.findFieldXpath("//input[@id='campoDyn_3700']");
+    WebElement ContactField = wf.findFieldXpath("//input[@id='campoDyn_3701']");
+    WebElement YesButton = wf.findFieldXpath("//div[@id='divOpcoes_3702']//input[1]");
+
+    String Unity = "HGV";
+    String Sector = "Sala da informática";
+    String Contact = "845772";
+
+    UnityField.sendKeys(Unity);
+    SectorField.sendKeys(Sector);
+    ContactField.sendKeys(Contact);
+    YesButton.click();
+
+
+}
  void serviceSelect(int i){
     WebElement ActivityButton = wf.findFieldXpath(
             "//label[@id='lblPesquisarServicoBusca']//i[contains(text(),'search')]");
@@ -70,9 +98,18 @@ void searchPerson(){
     WebElement DescriptionField = wf.findFieldXpath("//div[@id='fieldDescricao']//div[@class='controls']//div[@class='controls']//iframe[@class='wysihtml5-sandbox']");//div[@class='controls']//iframe[@class='wysihtml5-sandbox']");
     DescriptionField.click();
     String Description = DescriptionStringer(i);
-    DescriptionField.sendKeys("a     " + );
+    DescriptionField.sendKeys("a     " + Description);
 }
-void createRequest(){
+
+void fillAdditionalInformation(int i){
+    fillTagField(i);
+    fillRemainingFields();
+
+}
+void createRequest(int k){
+
+    WebElement recordRequestButton = wf.findFieldXpath("//button[@id='btnGravar']");
+
 
     openRequestTab();
     switchToIframe(iframe1Xpath);
@@ -80,7 +117,13 @@ void createRequest(){
     changeToTab2();
     searchPerson();
     changeToTab3();
-    serviceSelect();
+    serviceSelect(k);
+    switchToIframe(iframe2Xpath);
+    fillAdditionalInformation(k);
+
+    //recordRequestButton.click();//Create Request.
+
+
 
 
 }
