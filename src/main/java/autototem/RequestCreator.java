@@ -106,9 +106,10 @@ void fillAdditionalInformation(int i){
     fillRemainingFields();
 
 }
+
 void createRequest(int k){
 
-  //  WebElement recordRequestButton = wf.findFieldXpath("//button[@id='btnGravar']");
+
 
 
     openRequestTab();
@@ -120,8 +121,9 @@ void createRequest(int k){
     serviceSelect(k);
     switchToIframe(iframe2Xpath);
     fillAdditionalInformation(k);
-
-    //recordRequestButton.click();//Create Request.
+    Browser.driver.switchTo().parentFrame();
+    WebElement recordRequestButton = wf.findFieldXpath("//button[@id='btnGravar']");
+    recordRequestButton.click();//Create Request.
 
 
 

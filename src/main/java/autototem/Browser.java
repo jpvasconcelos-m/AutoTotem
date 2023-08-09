@@ -24,18 +24,22 @@ public class Browser {
         RequestReacher requestReacher = new RequestReacher();
         LoginInserter loginInserter = new LoginInserter();
         RequestCreator requestCreator = new RequestCreator();
+        RequestNumberSaver requestNumberSaver = new RequestNumberSaver();
 
         browser.accessAddress("https://www.cesu.pe.gov.br/");
         loginInserter.insertLogin("joao.mendes@zerohum.com.br", "Joaopedro132@");
 
 
         while(i < 7) {
-
+                i=4;
              wf.hold();
              requestReacher.reach();
              wf.hold();
              requestCreator.createRequest(i);
+             requestNumberSaver.copyRequestNumber();
              i++;
+             i=7;
+
          }
     }
 }
