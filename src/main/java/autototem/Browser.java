@@ -1,9 +1,7 @@
 package autototem;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Browser {
 
@@ -25,10 +23,11 @@ public class Browser {
 
          int i = 0;
         Browser browser = new Browser();
-        RequestReacher requestReacher = new RequestReacher();
+        RequestMenu requestMenu = new RequestMenu();
         LoginInserter loginInserter = new LoginInserter();
         RequestCreator requestCreator = new RequestCreator();
         RequestNumberSaver requestNumberSaver = new RequestNumberSaver();
+        RequestCatcher requestCatcher = new RequestCatcher();
 
         browser.accessAddress("https://www.cesu.pe.gov.br/");
         loginInserter.insertLogin("joao.mendes@zerohum.com.br", "Joaopedro132@");
@@ -37,10 +36,12 @@ public class Browser {
         while(i < 7) {
 
              wf.hold();
-             requestReacher.reach();
+             requestMenu.reach();
              wf.hold();
              requestCreator.createRequest(i);
              requestNumberSaver.SaveRequestNumbers();
+             wf.hold();
+             requestCatcher.Catch();
              i++;
              i=7;
 

@@ -1,9 +1,6 @@
 package autototem;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class TxtManager {
 
@@ -14,9 +11,11 @@ public class TxtManager {
 
         try {
 
-              File file = new File("/home/joaop/Downloads/aprendendospring(1)/AutoTotem/", filename + ".txt");
+              File file = new File("D:\\ProjetosJava\\AutoTotem", filename);
+
                 if (!file.exists()) {
                     file.createNewFile();
+                    System.out.println("File Created!");
                 }
 
         }
@@ -57,6 +56,24 @@ public class TxtManager {
         }
 
         }
+        String readTxt(String filename){
+
+         FileReader fr = null;
+         BufferedReader br = null;
+            try {
+                 fr = new FileReader(filename);
+                 br = new BufferedReader(fr);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                return br.readLine();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
 
 
 

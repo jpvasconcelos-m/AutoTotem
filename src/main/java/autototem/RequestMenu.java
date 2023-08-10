@@ -1,10 +1,6 @@
 package autototem;
 
-import org.bouncycastle.cert.ocsp.Req;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-public class RequestReacher {
+public class RequestMenu {
 
     void reach(){
        Browser.driver.get(
