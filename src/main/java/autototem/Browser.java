@@ -3,11 +3,14 @@ package autototem;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Browser {
 
+    String Cesu = "https://www.cesu.pe.gov.br/";
    static WebDriver driver = new ChromeDriver();//Open Browser.
     static WElementFinder wf = new WElementFinder();
+
 
 
      void accessAddress(String url){
@@ -19,6 +22,7 @@ public class Browser {
    }
 
     public static void main(String[] args) throws Exception {
+
          int i = 0;
         Browser browser = new Browser();
         RequestReacher requestReacher = new RequestReacher();
@@ -31,12 +35,12 @@ public class Browser {
 
 
         while(i < 7) {
-                i=4;
+
              wf.hold();
              requestReacher.reach();
              wf.hold();
              requestCreator.createRequest(i);
-             requestNumberSaver.copyRequestNumber();
+             requestNumberSaver.SaveRequestNumbers();
              i++;
              i=7;
 
