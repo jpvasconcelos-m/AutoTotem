@@ -3,11 +3,14 @@ package autototem;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.Scanner;
+
 public class Browser {
 
     String Cesu = "https://www.cesu.pe.gov.br/";
    static WebDriver driver = new ChromeDriver();//Open Browser.
     static WElementFinder wf = new WElementFinder();
+    static TxtManager tm = new TxtManager();
 
 
 
@@ -20,7 +23,12 @@ public class Browser {
    }
 
     public static void main(String[] args) throws Exception {
+         Scanner sc = new Scanner(System.in);
+        System.out.println("Digite a quantidade de chamados do ciclo ");
+        tm.overWriteTxt("RequestList.txt","");
 
+
+         int j = sc.nextInt();
          int i = 0;
         Browser browser = new Browser();
         RequestMenu requestMenu = new RequestMenu();
@@ -28,12 +36,13 @@ public class Browser {
         RequestCreator requestCreator = new RequestCreator();
         RequestNumberSaver requestNumberSaver = new RequestNumberSaver();
         RequestCatcher requestCatcher = new RequestCatcher();
+        RequestFinisher requestFinisher = new RequestFinisher();
 
         browser.accessAddress("https://www.cesu.pe.gov.br/");
         loginInserter.insertLogin("joao.mendes@zerohum.com.br", "Joaopedro132@");
 
 
-        while(i < 7) {
+        while(i < j) {
 
              wf.hold();
              requestMenu.reach();
@@ -41,10 +50,13 @@ public class Browser {
              requestCreator.createRequest(i);
              requestNumberSaver.SaveRequestNumbers();
              wf.hold();
-             requestCatcher.Catch();
+
              i++;
-             i=7;
+
 
          }
+        requestCatcher.Catch();
+        wf.hold();
+        requestFinisher.Finish();
     }
 }

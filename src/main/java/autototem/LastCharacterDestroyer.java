@@ -14,8 +14,5 @@ public class LastCharacterDestroyer {
 
 
 
-    public static void main(String[] args) {
-       LastCharacterDestroyer ld = new LastCharacterDestroyer();
-       ld.RemoveLastCharacter("1234,");
-    }
+
 }
