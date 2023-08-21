@@ -51,7 +51,8 @@ public class RequestFinisher {
 
     void Finish(){
 
-        WebElement FinishButton = wf.findFieldXpath("//button[@id='btnGravar']");
+        WebElement FinishButton = wf.findFieldXpath(
+                "/html[1]/body[1]/div[4]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/form[1]/div[7]/div[1]/button[1]");
 
         Browser.driver.get("https://www.cesu.pe.gov.br/citsmart/jspEmbedded/43871/jsp_303_process.jsp");
         fillRequestField();

@@ -23,12 +23,12 @@ public class Browser {
    }
 
     public static void main(String[] args) throws Exception {
-         Scanner sc = new Scanner(System.in);
-        System.out.println("Digite a quantidade de chamados do ciclo ");
+        // Scanner sc = new Scanner(System.in);
+        //System.out.println("Digite a quantidade de chamados do ciclo ");
         tm.overWriteTxt("RequestList.txt","");
 
 
-         int j = sc.nextInt();
+        // int j = sc.nextInt();
          int i = 0;
         Browser browser = new Browser();
         RequestMenu requestMenu = new RequestMenu();
@@ -42,7 +42,7 @@ public class Browser {
         loginInserter.insertLogin("joao.mendes@zerohum.com.br", "Joaopedro132@");
 
 
-        while(i < j) {
+        while(i < 7) {
 
              wf.hold();
              requestMenu.reach();
@@ -56,6 +56,7 @@ public class Browser {
 
          }
         requestCatcher.Catch();
+        wf.hold();
         wf.hold();
         requestFinisher.Finish();
     }
