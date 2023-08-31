@@ -57,7 +57,6 @@ public class Browser {
          }
         requestCatcher.Catch();
         wf.hold();
-        wf.hold();
         requestFinisher.Finish();
     }
 }
