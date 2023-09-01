@@ -4,13 +4,31 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
-import javax.enterprise.inject.New;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class RequestCreator {
 
 WElementFinder wf = new WElementFinder();
 String iframe1Xpath = "//iframe[@id='frameNovaSolicitacao']";
 String iframe2Xpath = "//iframe[@id='fraInformacoesComplementares']";
+
+static Request r1 = new Request("1021546","Configuração do totem do balcão de informações.");
+static Request r2 = new Request("1020905","Configuração do painel da ortopedia.");
+static Request r3 = new Request("1021551","Configuração do painel da marcação de consultas.");
+static Request r4 = new Request("1021021","Configuração do totem da marcação de consultas.");
+static Request r5 = new Request("1021268","Configuração do totem do primeiro andar.");
+static Request r6 = new Request("1020932","Configuração do painel da clínica médica.");
+static Request r7 = new Request("1020901","Configuração do painel da clínica urológica.");
+
+   static List<Request> RequestList = new ArrayList<>(Arrays.asList(r1,r2,r3,r4,r5,r6,r7));
+
+
+
+
+
 
 void openRequestTab(){
     WebElement NewRequestButton = wf.findFieldXpath(
@@ -48,19 +66,13 @@ void searchPerson(){
     WebElement Tab3Button = wf.findFieldXpath("//a[@id='tab3']");
     Tab3Button.click();
  }
- String DescriptionStringer(int i){
-     String[] Descricoes = {"Configuração do totem do balcão de informações."
-     ,"Configuração do painel da ortopedia.","Configuração do painel da marcação de consultas."
-     ,"Configuração do totem da marcação de consultas.","Configuração do totem do primeiro andar.",
-     "Configuração do painel da clínica médica.","Configuração do painel da clínica urológica."
-     };
-     return Descricoes[i];
+  String DescriptionStringer(int i){
+
+     return RequestList.get(i).getDescription();
  }
  String TagStringer(int i){
-    String[] Tags = {"1021546","1020905","1021551","1021021","1021268","1020932","1020901"
-    };
 
-    return Tags[i];
+    return RequestList.get(i).getTag();
  }
  void fillTagField(int i){
     WebElement TagField = wf.findFieldXpath("//input[@id='campoDyn_3697']");
