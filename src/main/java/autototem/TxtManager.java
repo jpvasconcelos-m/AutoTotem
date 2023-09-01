@@ -47,7 +47,7 @@ public class TxtManager {
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(text);
             bw.close();
-            System.out.println("Txt successful overwrite!");
+            System.out.println("Txt successful overwritten!");
         }
         catch(IOException e){
 
