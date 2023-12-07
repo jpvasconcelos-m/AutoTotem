@@ -26,7 +26,7 @@ void Catch(){
     CatcherField.sendKeys(Requests);
 
     WebElement CatchButton = wf.findFieldXpath("//button[@id='btnGravar']");
-    CatchButton.click();
+   CatchButton.click();
 }
 
 

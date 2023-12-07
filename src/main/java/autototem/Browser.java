@@ -42,7 +42,7 @@ public class Browser {
         loginInserter.insertLogin("joao.mendes@zerohum.com.br", "Joaopedro132@");
 
 
-        while(i < 7) {
+        while(i < 6) {
 
              wf.hold();
              requestMenu.reach();
