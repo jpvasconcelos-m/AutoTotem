@@ -7,10 +7,10 @@ import java.util.Scanner;
 
 public class Browser {
 
-    String Cesu = "https://www.cesu.pe.gov.br/";
+    String Cesu = "https://legado.cesu.pe.gov.br/citsmart/pages/login/login.load";
    static WebDriver driver = new ChromeDriver();//Open Browser.
     static WElementFinder wf = new WElementFinder();
-    static TxtManager tm = new TxtManager();
+    static TxtManager tm = new TxtManager(); 
 
 
 
@@ -38,7 +38,7 @@ public class Browser {
         RequestCatcher requestCatcher = new RequestCatcher();
         RequestFinisher requestFinisher = new RequestFinisher();
 
-        browser.accessAddress("https://www.cesu.pe.gov.br/");
+        browser.accessAddress("https://legado.cesu.pe.gov.br/citsmart/pages/login/login.load");
         loginInserter.insertLogin("joao.mendes@zerohum.com.br", "Joaopedro132@");
 
 

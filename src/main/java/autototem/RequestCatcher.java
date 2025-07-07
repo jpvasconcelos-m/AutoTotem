@@ -9,7 +9,7 @@ public class RequestCatcher {
     static LastCharacterDestroyer ld = new LastCharacterDestroyer();
 
 private void reach(){
-    Browser.driver.get("https://www.cesu.pe.gov.br/citsmart/jspEmbedded/43871/jsp_302_process.jsp");
+    Browser.driver.get("https://legado.cesu.pe.gov.br/citsmart/jspEmbedded/59219/jsp_302_process.jsp");
 }
 
 String createStringFromTxt(){
