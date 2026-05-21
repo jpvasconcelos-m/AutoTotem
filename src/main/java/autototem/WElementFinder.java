@@ -8,30 +8,29 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class WElementFinder {
-    WebDriverWait wait = new WebDriverWait(Browser.driver, Duration.ofSeconds(30));
 
-    WebElement findFieldXpath(String xpath)  {
-
-        return wait.until(ExpectedConditions.elementToBeClickable((By.xpath(xpath))));
-
-    }
-    WebElement findFieldId(String id)  {
-
-        return wait.until(ExpectedConditions.elementToBeClickable(By.id(id)));
-
-    }
-    WebElement findFieldCss(String css)  {
-
-        return wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(css)));
-
+    private WebDriverWait createWait() {
+        return new WebDriverWait(Browser.driver, Duration.ofSeconds(30));
     }
 
-    void hold(){
-        try{
-            Thread.sleep(1500);}
-        catch(InterruptedException e){
+    WebElement findFieldXpath(String xpath) {
+        return createWait().until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+    }
+
+    WebElement findFieldId(String id) {
+        return createWait().until(ExpectedConditions.elementToBeClickable(By.id(id)));
+    }
+
+    WebElement findFieldCss(String css) {
+        return createWait().until(ExpectedConditions.elementToBeClickable(By.cssSelector(css)));
+    }
+
+    void hold() {
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
             throw new RuntimeException(e);
         }
-
     }
 }

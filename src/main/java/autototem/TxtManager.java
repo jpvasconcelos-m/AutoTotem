@@ -11,7 +11,7 @@ public class TxtManager {
 
         try {
 
-              File file = new File("C:\\Users\\joao.mendes\\IdeaProjects\\AutoTotem\\src\\main\\java\\autototem", filename);
+              File file = new File(filename);
 
                 if (!file.exists()) {
                     file.createNewFile();

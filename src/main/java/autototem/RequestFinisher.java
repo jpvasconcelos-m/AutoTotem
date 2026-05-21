@@ -32,24 +32,22 @@ public class RequestFinisher {
 
     }
 
-    static void causeDescription(){
+    static void causeDescription(String text){
         WebElement CauseDescriptionField = wf.findFieldXpath("//textarea[@id='detalhamentoCausa']");
-        String Cause = "Configuração corriqueira de painéis e totens.";
-        CauseDescriptionField.sendKeys(Cause);
+        CauseDescriptionField.sendKeys(text);
     }
     static void selectSolution(String xpath){
         selectCause(xpath);
     }
-    static void solutionDescription(){
+    static void solutionDescription(String text){
         WebElement SolutionDescriptionField = wf.findFieldXpath("//textarea[@id='resposta']");
-        String Solution = "Configuração corriqueira de painéis e totens.";
-        SolutionDescriptionField.sendKeys(Solution);
+        SolutionDescriptionField.sendKeys(text);
     }
 
 
 
 
-    void Finish(){
+    void Finish(String causeDesc, String solutionDesc){
 
         Browser.driver.get("https://legado.cesu.pe.gov.br/citsmart/jspEmbedded/59219/jsp_303_process.jsp");
 
@@ -58,9 +56,9 @@ public class RequestFinisher {
 
         fillRequestField();
         selectCause("//select[@id='idCausaIncidente']");
-        causeDescription();
+        causeDescription(causeDesc);
         selectSolution("//select[@id='idCategoriaSolucao']");
-        solutionDescription();
+        solutionDescription(solutionDesc);
 
         FinishButton.click();
 

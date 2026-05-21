@@ -1,6 +1,10 @@
 package autototem;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class RequestCatcher {
 
@@ -26,7 +30,16 @@ void Catch(){
     CatcherField.sendKeys(Requests);
 
     WebElement CatchButton = wf.findFieldXpath("//button[@id='btnGravar']");
-   CatchButton.click();
+    CatchButton.click();
+
+    // Aceita o alerta "Capturas efetuadas com sucesso!" se aparecer
+    try {
+        new WebDriverWait(Browser.driver, Duration.ofSeconds(10))
+            .until(ExpectedConditions.alertIsPresent());
+        Browser.driver.switchTo().alert().accept();
+    } catch (Exception ignored) {}
+
+    wf.hold();
 }
 
 

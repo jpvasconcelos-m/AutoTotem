@@ -1,148 +1,89 @@
 package autototem;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-
 public class RequestCreator {
 
-WElementFinder wf = new WElementFinder();
-String iframe1Xpath = "//iframe[@id='frameNovaSolicitacao']";
-String iframe2Xpath = "//iframe[@id='fraInformacoesComplementares']";
-
-static Request r1 = new Request("1021546","Configuração do totem do balcão de informações.");
-static Request r2 = new Request("1020905","Configuração do painel da ortopedia.");
-static Request r3 = new Request("1021551","Configuração do painel da marcação de consultas.");
-//static Request r4 = new Request("1021021","Configuração do totem da marcação de consultas.");
-static Request r5 = new Request("1021268","Configuração do totem do primeiro andar.");
-static Request r6 = new Request("1020932","Configuração do painel da clínica médica.");
-static Request r7 = new Request("1020901","Configuração do painel da clínica urológica.");
-
-   static List<Request> RequestList = new ArrayList<>(Arrays.asList(r1,r2,r3,r5,r6,r7));
+    WElementFinder wf = new WElementFinder();
+    String iframe1Xpath = "//iframe[@id='frameNovaSolicitacao']";
+    String iframe2Xpath = "//iframe[@id='fraInformacoesComplementares']";
 
 
 
 
 
 
-void openRequestTab(){
-    WebElement NewRequestButton = wf.findFieldXpath(
-            "//span[@class='btn btn-icon btn-primary']");
-    NewRequestButton.click();
-}
-    //div[@id='fieldDescricao']//div[@class='controls']//div[@class='controls']//iframe[@class='wysihtml5-sandbox'];
-void switchToIframe(String xpath){
-    WebElement iframe = Browser.driver.findElement(By.xpath(xpath));
-    Browser.driver.switchTo().frame(iframe);
-}
-void selectContract(){
-    String Contract = "ses";
-    WebElement ContractDropdown = wf.findFieldId("idContrato");
-    wf.hold();wf.hold();
-    ContractDropdown.click();
-    ContractDropdown.sendKeys(Contract);
-
-}
-void changeToTab2(){
-        WebElement Tab2Button = wf.findFieldXpath("//a[@id='tab2']");
-        Tab2Button.click();
-}
-void searchPerson(){
-        WebElement PersonField = wf.findFieldXpath("//input[@id='solicitante']");
-        String Person = "Rodolfo de Oliveira Barros";
-        PersonField.sendKeys(Person);
-        wf.hold();wf.hold();
-        PersonField.sendKeys(Keys.DOWN);
+    void openRequestTab() {
+        wf.findFieldXpath("//span[@class='btn btn-icon btn-primary']").click();
+    }
+    void switchToIframe(String xpath) {
+        WebElement iframe = wf.findFieldXpath(xpath);
+        Browser.driver.switchTo().frame(iframe);
+    }
+    void selectContract() {
+        WebElement contractDropdown = wf.findFieldId("idContrato");
         wf.hold(); wf.hold();
-        PersonField.sendKeys(Keys.ENTER);
+        contractDropdown.click();
+        contractDropdown.sendKeys("ses");
     }
 
- void changeToTab3(){
-    WebElement Tab3Button = wf.findFieldXpath("//a[@id='tab3']");
-    Tab3Button.click();
- }
-  String DescriptionStringer(int i){
+    void changeToTab2() {
+        wf.findFieldXpath("//a[@id='tab2']").click();
+    }
+void searchPerson(String person) {
+        WebElement personField = wf.findFieldXpath("//input[@id='solicitante']");
+        personField.sendKeys(person);
+        wf.hold(); wf.hold();
+        personField.sendKeys(Keys.DOWN);
+        wf.hold(); wf.hold();
+        personField.sendKeys(Keys.ENTER);
+    }
 
-     return RequestList.get(i).getDescription();
- }
- String TagStringer(int i){
+    void changeToTab3() {
+        wf.findFieldXpath("//a[@id='tab3']").click();
+    }
+    void fillAdditionalInformation(RequestTemplate template) {
+        System.out.println("[DEBUG] Preenchendo campos em iframe2...");
+        wf.findFieldXpath("//input[@id='campoDyn_3855']").sendKeys(template.getSector());
+        System.out.println("[DEBUG] 3855 ok");
+        wf.findFieldXpath("//input[@id='campoDyn_3856']").sendKeys(template.getContact());
+        System.out.println("[DEBUG] 3856 ok");
+        wf.findFieldXpath("//input[@id='campoDyn_3857']").sendKeys(template.getIp() != null ? template.getIp() : "");
+        System.out.println("[DEBUG] fillAdditionalInformation concluido");
+    }
 
-    return RequestList.get(i).getTag();
- }
- void fillTagField(int i){
-    WebElement TagField = wf.findFieldXpath("//input[@id='campoDyn_3697']");
-    String Tag = TagStringer(i);
-    TagField.sendKeys(Tag);
- }
- void fillRemainingFields(){
-    WebElement UnityField = wf.findFieldXpath("//input[@id='campoDyn_3699']");
-    WebElement SectorField = wf.findFieldXpath("//input[@id='campoDyn_3700']");
-    WebElement ContactField = wf.findFieldXpath("//input[@id='campoDyn_3701']");
-    WebElement YesButton = wf.findFieldXpath("//div[@id='divOpcoes_3702']//input[1]");
+    void serviceSelect(RequestTemplate template) {
+        wf.findFieldXpath("//label[@id='lblPesquisarServicoBusca']//i[contains(text(),'search')]").click();
+        WebElement serviceField = wf.findFieldXpath("//input[@id='filtroTableServicos']");
+        serviceField.sendKeys(template.getServiceSearchId());
+        wf.findFieldXpath("//td[contains(text(),'" + template.getServiceTableText() + "')]").click();
+        wf.hold();
+        WebElement descField = wf.findFieldXpath(
+            "//div[@id='fieldDescricao']//div[@class='controls']//div[@class='controls']//iframe[@class='wysihtml5-sandbox']");
+        descField.click();
+        descField.sendKeys("a     " + template.getDescription());
+    }
 
-    String Unity = "HGV";
-    String Sector = "Sala da informática";
-    String Contact = "845772";
-
-    UnityField.sendKeys(Unity);
-    SectorField.sendKeys(Sector);
-    ContactField.sendKeys(Contact);
-    YesButton.click();
-
-
-}
- void serviceSelect(int i){
-    WebElement ActivityButton = wf.findFieldXpath(
-            "//label[@id='lblPesquisarServicoBusca']//i[contains(text(),'search')]");
- ActivityButton.click();
-    WebElement ActivityField = wf.findFieldXpath(
-            "//input[@id='filtroTableServicos']");
-    String ServiceId = "6056";
-    ActivityField.sendKeys(ServiceId);
-    WebElement ActivityButton2 = wf.findFieldXpath("//td[contains(text(),'SES (HGV) > Impressora e Digitalização > Configura')]");
-            ActivityButton2.click();
-    wf.hold();
-    WebElement DescriptionField = wf.findFieldXpath("//div[@id='fieldDescricao']//div[@class='controls']//div[@class='controls']//iframe[@class='wysihtml5-sandbox']");//div[@class='controls']//iframe[@class='wysihtml5-sandbox']");
-    DescriptionField.click();
-    String Description = DescriptionStringer(i);
-    DescriptionField.sendKeys("a     " + Description);
-}
-
-void fillAdditionalInformation(int i){
-    fillTagField(i);
-    fillRemainingFields();
-
-}
-
-void createRequest(int k){
-
-
-
-
-    openRequestTab();
-    switchToIframe(iframe1Xpath);
-    selectContract();
-    changeToTab2();
-    searchPerson();
-    changeToTab3();
-    serviceSelect(k);
-    switchToIframe(iframe2Xpath);
-    fillAdditionalInformation(k);
-    Browser.driver.switchTo().parentFrame();
-    WebElement recordRequestButton = wf.findFieldXpath("//button[@id='btnGravar']");
-   recordRequestButton.click();//Create Request.
-
-
-
-}
-
-
-
-
+    void createRequest(RequestTemplate template) {
+        System.out.println("[DEBUG] createRequest iniciado");
+        openRequestTab();
+        System.out.println("[DEBUG] Entrando em iframe1...");
+        switchToIframe(iframe1Xpath);
+        selectContract();
+        changeToTab2();
+        searchPerson(template.getRequester());
+        changeToTab3();
+        serviceSelect(template);
+        System.out.println("[DEBUG] serviceSelect concluido, entrando no iframe2...");
+        wf.hold();
+        switchToIframe(iframe2Xpath);
+        System.out.println("[DEBUG] Dentro de iframe2");
+        fillAdditionalInformation(template);
+        System.out.println("[DEBUG] Voltando ao frame pai e clicando Gravar...");
+        Browser.driver.switchTo().parentFrame();
+        wf.findFieldXpath("//button[@id='btnGravar']").click();
+        System.out.println("[DEBUG] createRequest concluido");
+    }
 
 }

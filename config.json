@@ -1,0 +1,22 @@
+{
+  "username": "joaopedro.mendes@saude.pe.gov.br",
+  "password": "Fabricia0103@",
+  "causeDescription": "Demanda de atualização de planilha do TREND",
+  "solutionDescription": "Efetuada atualização de planilha constando dados de situação atual do antivírus.",
+  "queue": [
+    {
+      "name": "Atualização de planilha do TREND",
+      "serviceSearchId": "6135",
+      "serviceTableText": "SES (HGV) \u003e Sistema MV/SoulMV \u003e Administração de Sistema",
+      "requester": "Rodolfo de Oliveira Barros",
+      "tag": "",
+      "description": "Atualização de planilha do TREND para quantificar número de máquinas que necessitam de instalação/reinstalação de antivírus.",
+      "unity": "HGV",
+      "sector": "Sala da informática",
+      "contact": "845772",
+      "ip": "",
+      "quantity": 1,
+      "nameList": []
+    }
+  ]
+}
